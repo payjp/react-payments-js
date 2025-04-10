@@ -1,0 +1,41 @@
+{
+  "name": "@payjp/react-payments-js",
+  "version": "0.0.1",
+  "description": "helper module for PAY.JP payments.js with React",
+  "type": "module",
+  "files": [
+    "dist",
+    "./types/index.d.ts"
+  ],
+  "module": "./dist/react-payments-js.js",
+  "types": "./types/index.d.ts",
+  "exports": {
+    "types": "./types/index.d.ts",
+    "import": "./dist/react-payments-js.js"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/payjp/react-payments-js.git"
+  },
+  "author": "PAY.JP <support@pay.jp> (https://pay.jp)",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "devDependencies": {
+    "@payjp/payments-js": "file:../payments-js",
+    "@types/react": "^19.1.0",
+    "typescript": "~5.7.3",
+    "vite": "^6.1.1"
+  },
+  "peerDependencies": {
+    "@payjp/payments-js": ">=0.0.1 <1.0.0",
+    "react": ">=16.8.0 <20.0.0",
+    "react-dom": ">=16.8.0 <20.0.0"
+  }
+}
