@@ -14,7 +14,7 @@
     "import": "./dist/react-payments-js.js"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "tsc && vite build --watch",
     "build": "tsc && vite build",
     "prepublishOnly": "npm run build"
   },
