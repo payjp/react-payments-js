@@ -17,6 +17,7 @@ export interface ElementsProps {
 
 export const Elements = (props: PropsWithChildren<ElementsProps>) => {
   const { paymentsPromise, options, children } = props;
+  const { clientSecret, ...updatableOptions } = options;
 
   const [contextValue, setContextValue] = useState<ElementsContextValue>({
     payments: null,
@@ -35,6 +36,13 @@ export const Elements = (props: PropsWithChildren<ElementsProps>) => {
       });
     });
   }, [paymentsPromise, options]);
+
+  React.useEffect(() => {
+    if (!contextValue.elements) {
+      return;
+    }
+    contextValue.elements.update(updatableOptions);
+  }, [JSON.stringify(updatableOptions)]);
 
   return (
     <ElementsContext.Provider value={contextValue}>
