@@ -32,8 +32,21 @@ export const createElementComponent = (
       if (!elementRef.current) {
         return;
       }
-      // TODO: 更新可能な値のみに絞る
-      elementRef.current.update(options as any);
+
+      switch (type) {
+        case "payment":
+          const { layout, ...updatableOptions } =
+            options as paymentsJs.PayjpPaymentElementOptions;
+          elementRef.current.update(updatableOptions);
+          break;
+        case "address":
+          const { mode, autocomplete, ...updatableAddressOptions } =
+            options as paymentsJs.PayjpAddressElementOptions;
+          elementRef.current.update(updatableAddressOptions);
+          break;
+        default:
+          throw new Error(`Unknown element type: ${type}`);
+      }
     }, [options]);
 
     return <div id={id} className={className} ref={domNodeRef} />;
