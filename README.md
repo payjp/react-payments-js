@@ -57,7 +57,7 @@ const App = () => (
   <Elements
     paymentsPromise={paymentsPromise}
     options={{
-      clientSecret: "client-secret-for-intent-here",
+      clientSecret: "client-secret-for-flow-here",
     }}
   >
     <PaymentForm />
