@@ -26,12 +26,7 @@ const CheckoutForm = () => {
     }
 
     setIsLoading(true);
-    const { error } = await payments.confirmPayment({
-      widgets: widgets,
-      confirmParams: {
-        return_url: "https://example.com/return_url",
-      },
-    });
+    const { error } = await widgets.confirmPayment({ return_url: "https://example.com/return_url" });
     setIsLoading(false);
 
     if (error) {
