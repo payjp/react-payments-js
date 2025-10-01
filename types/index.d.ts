@@ -1,35 +1,35 @@
 import { FunctionComponent, PropsWithChildren } from 'react';
 import * as paymentsJs from '@payjp/payments-js';
 
-export type PaymentElementProps = { options?: paymentsJs.PayjpPaymentElementOptions; } & ElementProps
-export type AddressElementProps = { options: paymentsJs.PayjpAddressElementOptions; } & ElementProps
+export type PaymentFormProps = { options?: paymentsJs.PayjpPaymentFormOptions; } & FormProps
+export type AddressFormProps = { options: paymentsJs.PayjpAddressFormOptions; } & FormProps
 
-export interface ElementProps {
+export interface FormProps {
   id?: string;
   className?: string;
-  onBlur?: (event: {elementType: paymentsJs.PayjpElementType}) => any;
-  onFocus?: (event: {elementType: paymentsJs.PayjpElementType}) => any;
+  onBlur?: (event: {formType: paymentsJs.PayjpFormType}) => any;
+  onFocus?: (event: {formType: paymentsJs.PayjpFormType}) => any;
 }
 
-export type PaymentElementComponent = FunctionComponent<PaymentElementProps>;
-export type AddressElementComponent = FunctionComponent<AddressElementProps>;
+export type PaymentFormComponent = FunctionComponent<PaymentFormProps>;
+export type AddressFormComponent = FunctionComponent<AddressFormProps>;
 
-export interface ElementsContextValue {
+export interface WidgetsContextValue {
   payments: paymentsJs.PayjpPayments | null;
-  elements: paymentsJs.PayjpElements | null;
+  widgets: paymentsJs.PayjpWidgets | null;
 }
 
-export interface ElementsProps {
+export interface WidgetsProps {
   paymentsPromise: Promise<paymentsJs.PayjpPayments>;
-  options: paymentsJs.PayjpElementsOptionsClientSecret;
+  options: paymentsJs.PayjpWidgetsOptionsClientSecret;
 }
 
-export type ElementsComponent = FunctionComponent<PropsWithChildren<ElementsProps>>;
+export type WidgetsComponent = FunctionComponent<PropsWithChildren<WidgetsProps>>;
 
 
 declare module '@payjp/react-payments-js' {
-  export const useElements: () => ElementsContextValue;
-  export const Elements: ElementsComponent;
-  export const PaymentElement: PaymentElementComponent;
-  export const AddressElement: AddressElementComponent;
+  export const useWidgets: () => WidgetsContextValue;
+  export const Widgets: WidgetsComponent;
+  export const PaymentForm: PaymentFormComponent;
+  export const AddressForm: AddressFormComponent;
 }
