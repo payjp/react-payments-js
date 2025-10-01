@@ -1,8 +1,8 @@
-import { AddressElementComponent, PaymentElementComponent } from "../types";
-import { createElementComponent } from "./components/createElementComponent";
+import { AddressFormComponent, PaymentFormComponent } from "../types";
+import { createFormComponent } from "./components/createFormComponent";
 
-export { useElements } from "./components/Elements";
+export { useWidgets } from "./components/Widgets";
 
-export { Elements } from "./components/Elements";
-export const PaymentElement: PaymentElementComponent = createElementComponent("payment");
-export const AddressElement: AddressElementComponent = createElementComponent("address");
+export { Widgets } from "./components/Widgets";
+export const PaymentForm: PaymentFormComponent = createFormComponent("payment");
+export const AddressForm: AddressFormComponent = createFormComponent("address");
