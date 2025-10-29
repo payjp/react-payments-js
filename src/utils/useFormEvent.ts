@@ -6,15 +6,19 @@ export const useFormEvent = <T extends (...args: any[]) => any>(
   event: string,
   handler?: T
 ): void => {
-  if (!form || !handler) {
-    return;
-  }
-
   const handlerRef = useRef<T>(handler);
   handlerRef.current = handler;
 
   useEffect(() => {
-    const eventHandler = (...args: any[]) => handlerRef.current(...args);
+    if (!form || !handler) {
+      return;
+    }
+
+    const eventHandler = (...args: any[]) => {
+      if (handlerRef.current) {
+        return handlerRef.current(...args);
+      }
+    };
     (form as any).on(event, eventHandler);
 
     return () => {
