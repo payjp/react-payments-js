@@ -65,3 +65,63 @@ createRoot(document.getElementById("app")!).render(
   </StrictMode>
 );
 ```
+
+## イベントハンドラー
+
+PaymentForm および AddressForm コンポーネントは、以下のイベントハンドラーをサポートしています。
+
+### PaymentForm
+
+```typescript
+<PaymentForm
+  onChange={(event) => {
+    console.log('Payment method type:', event.value.type);
+    console.log('Is complete:', event.complete);
+    console.log('Is empty:', event.empty);
+  }}
+  onFocus={() => console.log('Payment form focused')}
+  onBlur={() => console.log('Payment form blurred')}
+  onReady={() => console.log('Payment form ready')}
+/>
+```
+
+**onChange イベント:**
+
+- `elementType`: `"payment"` (固定値)
+- `empty`: フォームが空の場合 `true`
+- `complete`: フォームが完全に入力された場合 `true`
+- `value.type`: 選択された支払い方法のタイプ（`payjp.PaymentMethodTypes` または `null`）
+
+### AddressForm
+
+```typescript
+<AddressForm
+  options={{ mode: "shipping" }}
+  onChange={(event) => {
+    console.log('Address mode:', event.elementMode);
+    console.log('Name:', event.value.name);
+    console.log('Address:', event.value.address);
+    console.log('Phone:', event.value.phone);
+    console.log('Is complete:', event.complete);
+  }}
+  onFocus={() => console.log('Address form focused')}
+  onBlur={() => console.log('Address form blurred')}
+  onReady={() => console.log('Address form ready')}
+/>
+```
+
+**onChange イベント:**
+
+- `elementType`: `"address"` (固定値)
+- `elementMode`: アドレスフォームのモード（`"shipping"` または `"billing"`）
+- `empty`: フォームが空の場合 `true`
+- `complete`: フォームが完全に入力された場合 `true`
+- `value.name`: 入力された名前
+- `value.address`: 入力された住所情報
+- `value.phone`: 入力された電話番号
+
+### 共通イベント
+
+- `onReady`: フォームの準備が完了したときに発火
+- `onFocus`: フォーム内の要素がフォーカスされたときに発火
+- `onBlur`: フォーム内の要素からフォーカスが外れたときに発火

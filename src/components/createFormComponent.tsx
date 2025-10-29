@@ -1,35 +1,32 @@
 import * as React from 'react'
-import { FunctionComponent, useLayoutEffect, useEffect } from 'react'
+import { useState, FunctionComponent, useLayoutEffect, useEffect } from 'react'
 import { useWidgets } from './Widgets'
 import * as paymentsJs from '@payjp/payments-js'
-import { FormProps } from '../../types'
+import { AddressFormProps, FormProps, PaymentFormProps } from '../../types'
+import { useFormEvent } from '../utils/useFormEvent'
 
 export const createFormComponent = (
   type: paymentsJs.PayjpFormType
 ): FunctionComponent<FormProps> => {
   const formComponent: FunctionComponent<
-    FormProps & {
-      options?:
-        | paymentsJs.PayjpPaymentFormOptions
-        | paymentsJs.PayjpAddressFormOptions;
-    }
+    PaymentFormProps | AddressFormProps
   > = (props) => {
     const { id, className, options } = props;
     const { widgets } = useWidgets();
 
-    const formRef = React.useRef<paymentsJs.PayjpForm | null>(null);
+    const [form, setForm] = useState<paymentsJs.PayjpForm | null>(null);
     const domNodeRef = React.useRef<HTMLDivElement | null>(null);
 
     useLayoutEffect(() => {
-      if (widgets && !formRef.current && domNodeRef.current) {
+      if (widgets && !form && domNodeRef.current) {
         const form = widgets.createForm(type as any, options as any);
         form.mount(domNodeRef.current);
-        formRef.current = form;
+        setForm(form);
       }
     });
 
     useEffect(() => {
-      if (!formRef.current) {
+      if (!form) {
         return;
       }
 
@@ -37,17 +34,22 @@ export const createFormComponent = (
         case "payment":
           const { layout, ...updatableOptions } =
             options as paymentsJs.PayjpPaymentFormOptions;
-          formRef.current.update(updatableOptions);
+          form.update(updatableOptions);
           break;
         case "address":
           const { mode, autocomplete, ...updatableAddressOptions } =
             options as paymentsJs.PayjpAddressFormOptions;
-          formRef.current.update(updatableAddressOptions);
+          form.update(updatableAddressOptions);
           break;
         default:
           throw new Error(`Unknown form type: ${type}`);
       }
     }, [options]);
+
+    useFormEvent(form, "change", props.onChange);
+    useFormEvent(form, "blur", props.onBlur);
+    useFormEvent(form, "focus", props.onFocus);
+    useFormEvent(form, "ready", props.onReady);
 
     return <div id={id} className={className} ref={domNodeRef} />;
   };
