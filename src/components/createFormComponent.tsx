@@ -2,17 +2,14 @@ import * as React from 'react'
 import { FunctionComponent, useLayoutEffect, useEffect } from 'react'
 import { useWidgets } from './Widgets'
 import * as paymentsJs from '@payjp/payments-js'
-import { FormProps } from '../../types'
+import { AddressFormProps, FormProps, PaymentFormProps } from '../../types'
+import { useFormEvent } from '../utils/useFormEvent'
 
 export const createFormComponent = (
   type: paymentsJs.PayjpFormType
 ): FunctionComponent<FormProps> => {
   const formComponent: FunctionComponent<
-    FormProps & {
-      options?:
-        | paymentsJs.PayjpPaymentFormOptions
-        | paymentsJs.PayjpAddressFormOptions;
-    }
+    PaymentFormProps | AddressFormProps
   > = (props) => {
     const { id, className, options } = props;
     const { widgets } = useWidgets();
@@ -48,6 +45,11 @@ export const createFormComponent = (
           throw new Error(`Unknown form type: ${type}`);
       }
     }, [options]);
+
+    useFormEvent(formRef.current, "change", props.onChange);
+    useFormEvent(formRef.current, "blur", props.onBlur);
+    useFormEvent(formRef.current, "focus", props.onFocus);
+    useFormEvent(formRef.current, "ready", props.onReady);
 
     return <div id={id} className={className} ref={domNodeRef} />;
   };
