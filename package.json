@@ -26,7 +26,8 @@
   "author": "PAY.JP <support@pay.jp> (https://pay.jp)",
   "license": "MIT",
   "publishConfig": {
-    "access": "restricted"
+    "access": "public",
+    "provenance": true
   },
   "devDependencies": {
     "@payjp/payments-js": "^1.0.0",
