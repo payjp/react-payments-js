@@ -5,7 +5,7 @@
   "type": "module",
   "files": [
     "dist",
-    "./types/index.d.ts"
+    "types"
   ],
   "module": "./dist/react-payments-js.js",
   "types": "./types/index.d.ts",
@@ -16,6 +16,7 @@
   "scripts": {
     "dev": "tsc && vite build --watch",
     "build": "tsc && vite build",
+    "test": "vitest run",
     "prepublishOnly": "npm run build"
   },
   "repository": {
@@ -25,16 +26,22 @@
   "author": "PAY.JP <support@pay.jp> (https://pay.jp)",
   "license": "MIT",
   "publishConfig": {
-    "access": "restricted"
+    "access": "public",
+    "provenance": true
   },
   "devDependencies": {
-    "@payjp/payments-js": "file:../payments-js",
+    "@payjp/payments-js": "^1.0.1",
+    "@testing-library/react": "^16.3.0",
     "@types/react": "^19.1.0",
+    "happy-dom": "^20.0.10",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "typescript": "~5.7.3",
-    "vite": "^6.1.1"
+    "vite": "^6.1.1",
+    "vitest": "^4.0.5"
   },
   "peerDependencies": {
-    "@payjp/payments-js": ">=0.0.1 <1.0.0",
+    "@payjp/payments-js": ">=1.0.0 <2.0.0",
     "react": ">=16.8.0 <20.0.0",
     "react-dom": ">=16.8.0 <20.0.0"
   }
