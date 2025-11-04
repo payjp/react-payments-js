@@ -341,7 +341,7 @@ describe('createFormComponent', () => {
     it('should not include mode and autocomplete in update call', async () => {
       const initialOptions = {
         mode: 'shipping' as const,
-        autocomplete: true,
+        autocomplete: { mode: 'automatic' as const },
         defaultValues: { name: 'Test' },
       };
 
@@ -362,7 +362,7 @@ describe('createFormComponent', () => {
 
       const updatedOptions = {
         mode: 'billing' as const,
-        autocomplete: false,
+        autocomplete: { mode: 'disabled' as const },
         defaultValues: { name: 'Updated' },
       };
 
