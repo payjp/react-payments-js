@@ -1,5 +1,7 @@
 # @payjp/react-payments-js: React Component for PAY.JP v2 API
 
+[![npm version](https://img.shields.io/npm/v/@payjp/react-payments-js.svg)](https://www.npmjs.com/package/@payjp/react-payments-js)
+
 @payjp/react-payments-js は React で payments.js を利用するためのラッパーライブラリです。
 各種の Form を React Component として提供します。
 
