@@ -211,6 +211,7 @@ describe('createFormComponent', () => {
       const onReady = vi.fn();
       const onFocus = vi.fn();
       const onBlur = vi.fn();
+      const onLoadError = vi.fn();
 
       render(
         <Widgets
@@ -222,6 +223,7 @@ describe('createFormComponent', () => {
             onReady={onReady}
             onFocus={onFocus}
             onBlur={onBlur}
+            onLoadError={onLoadError}
           />
         </Widgets>
       );
@@ -231,6 +233,7 @@ describe('createFormComponent', () => {
         expect(mockForm.on).toHaveBeenCalledWith('ready', expect.any(Function));
         expect(mockForm.on).toHaveBeenCalledWith('focus', expect.any(Function));
         expect(mockForm.on).toHaveBeenCalledWith('blur', expect.any(Function));
+        expect(mockForm.on).toHaveBeenCalledWith('loaderror', expect.any(Function));
       });
     });
   });
@@ -390,6 +393,7 @@ describe('createFormComponent', () => {
       const onReady = vi.fn();
       const onFocus = vi.fn();
       const onBlur = vi.fn();
+      const onLoadError = vi.fn();
 
       render(
         <Widgets
@@ -402,6 +406,7 @@ describe('createFormComponent', () => {
             onReady={onReady}
             onFocus={onFocus}
             onBlur={onBlur}
+            onLoadError={onLoadError}
           />
         </Widgets>
       );
@@ -411,6 +416,7 @@ describe('createFormComponent', () => {
         expect(mockForm.on).toHaveBeenCalledWith('ready', expect.any(Function));
         expect(mockForm.on).toHaveBeenCalledWith('focus', expect.any(Function));
         expect(mockForm.on).toHaveBeenCalledWith('blur', expect.any(Function));
+        expect(mockForm.on).toHaveBeenCalledWith('loaderror', expect.any(Function));
       });
     });
   });

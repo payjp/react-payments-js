@@ -50,6 +50,7 @@ export const createFormComponent = (
     useFormEvent(form, "blur", props.onBlur);
     useFormEvent(form, "focus", props.onFocus);
     useFormEvent(form, "ready", props.onReady);
+    useFormEvent(form, "loaderror", props.onLoadError);
 
     return <div id={id} className={className} ref={domNodeRef} />;
   };

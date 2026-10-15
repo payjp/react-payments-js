@@ -6,6 +6,7 @@ export type PaymentFormProps = {
   onBlur?: () => void;
   onFocus?: () => void;
   onReady?: () => void;
+  onLoadError?: (event: { error: paymentsJs.PayjpPaymentsError }) => void;
   onChange?: (event: {
     elementType: "payment";
     empty: boolean;
@@ -19,6 +20,7 @@ export type AddressFormProps = {
   onBlur?: () => void;
   onFocus?: () => void;
   onReady?: () => void;
+  onLoadError?: (event: { error: paymentsJs.PayjpPaymentsError }) => void;
   onChange?: (event: {
     elementType: "address";
     elementMode: paymentsJs.AddressMode;
