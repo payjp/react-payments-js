@@ -125,6 +125,6 @@ PaymentForm および AddressForm コンポーネントは、以下のイベン�
 ### 共通イベント
 
 - `onReady`: フォームの準備が完了したときに発火
-- `onLoadError`: Widgets のセッションを取得できず、フォームを表示できないときに発火。`event.error` は `{ type: "sdk_error", code: "session_not_loaded" }`。利用者にページの再読み込みを促してください
+- `onLoadError`: Widgets のセッションを取得できず、フォームを表示できないときに発火。`event.error` は `{ type: "sdk_error", code: "session_not_loaded" }`。再試行しても取得できなかった場合のほか、client_secret が無効な場合にも発火します（フォームの iframe 自体を読み込めなかった場合は発火しません）。利用者にはページの再読み込みを促し、解消しない場合は client_secret を確認してください
 - `onFocus`: フォーム内の要素がフォーカスされたときに発火
 - `onBlur`: フォーム内の要素からフォーカスが外れたときに発火
